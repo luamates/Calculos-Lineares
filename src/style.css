@@ -1,0 +1,299 @@
+body {
+  text-align: center;
+}
+
+.inputs {
+  width: 50%;
+  padding: 10px;
+  font-size: 15px;
+} 
+
+section {
+  text-align: left;
+  margin: 0px;
+  margin-left: 20%;
+}
+
+#a001 {
+  text-align: center;
+}
+
+#padrao {
+  font-size: 25px;
+}
+
+.explaintext {
+  font-size: 15px;
+}
+
+.input {
+  width: 55px;
+  height: 30px;
+  font-size: 17px;
+  background-color: rgb(201, 231, 201);
+  text-decoration: none;
+  border: none;
+  border-radius: 8px;
+}
+
+span {
+  text-align: left;
+}
+
+#selectbtn {
+  text-align: left;
+  width: 100px;
+  margin: auto;
+}
+
+#botao {
+  width: 100px;
+  height: 35px;
+  background-color: green;
+  border-radius: 8px;
+  margin-left: -90%;
+  text-decoration: none;
+  border: none;
+  transition: .2s;
+}
+
+#goBack {
+  width: 100px;
+  height: 35px;
+  background-color: rgb(112, 158, 223);
+  border-radius: 8px;
+  margin-left: -90%;
+  text-decoration: none;
+  border: none;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.construirBTN {
+  width: 150px;
+  height: 35px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  
+  text-decoration: none;
+  border: none;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.construirBTN:hover {
+  background-color: rgb(76, 148, 68);
+  color: #fff;
+  width: 180px;
+}
+
+#botao:hover {
+  background-color: rgb(187, 92, 36);
+}
+
+#goBack:hover {
+  background-color: rgb(19, 39, 155);
+  color: white;
+}
+
+.titulo {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.titulo>h1 {
+  font-size: 35px;
+}
+
+.definition {
+  padding: 5px;
+  width: 50%;
+}
+
+#definicao {
+  width: 60%;
+}
+
+.title-proj {
+  background-color: rgb(113, 173, 207);
+  margin: 0px;
+  text-align: center;
+  width: 100%;
+  height: 55px;
+  vertical-align: middle;
+  padding: 5;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
+.title-proj>h1 {
+  font-size: 35px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background-color: rgb(113, 173, 207);
+}
+
+nav {
+  height: 80px;
+}
+
+.navbar-nav {
+  margin: auto;
+}
+
+.nav-link {
+  margin: 10px 25px;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+}
+
+.nav-link:hover {
+  color: rgb(43, 115, 156);
+}
+
+.box {
+  width: 100%;
+  height: 30px;
+  background-color: rgb(113, 173, 207);
+  position: relative;
+}
+
+.box-1 {
+  width: 50%;
+  background-color: #fff;
+  height: 100%;
+  border-radius: 0px 40px 0px 0px;
+  border-top: 5px solid rgb(0, 57, 163);
+  border-right: 5px solid rgb(0, 57, 163);
+}
+
+.box-2 {
+  position: absolute;
+  background-color: #fff;
+  height: 100%;
+  width: 50%;
+  right: 0;
+  top: 0;
+  border-radius: 40px 0px 0px 0px;
+  border-top: 5px solid rgb(0, 57, 163);
+  border-left: 5px solid rgb(0, 57, 163);
+}
+
+h1 {
+  margin-top: 200px;
+}
+
+
+.content-flex {
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(113, 173, 207);
+  margin-left: 5%;
+  margin-right: 5%;
+  border-radius: 8px;
+}
+
+.largura2 {
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+#divisoria {
+  background-color: rgb(0, 57, 163);
+  margin: 0px;
+  padding: 0px;
+  width: 10px;
+}
+
+.divisoria1 {
+  height: 5px;
+  width: 100%;
+  background-color: rgb(0, 57, 163);
+  margin-top: 15px;
+  
+}
+
+.solucao {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+#calculator {
+  text-align: center;
+  margin: auto;
+  width: 70%;
+  height: 400px;
+}
+
+#fotoMat {
+  width: 40%;
+  height: 300px;
+  object-fit: cover;
+  margin-left: 30%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+
+
+
+
+.column {
+  width: 50%;
+  text-align: center;
+  margin: auto;
+}
+table {
+  border-collapse: collapse;
+  text-align: center;
+  border-radius: 5px;
+  margin-left: 5%;
+}
+th, td {
+  border: 1px solid black;
+  padding: 2.5px;
+}
+.cost, .blank {
+  width: 100px;
+}
+.blank {
+  border-bottom: 0;
+}
+.x {
+  border-top: 0;
+  height: 25px;
+}
+.supply, .demand {
+  width: 100px;
+}
+.hidden1 {
+  display: none;
+}
+.line-through {
+  text-decoration: line-through;
+}
+.yellow {
+  background-color: yellow;
+}
+
+#next {
+  cursor: pointer;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  height: 40px;
+  transition: .3s;
+}
+
+#next:hover {
+  background-color: rgba(47, 91, 194, 0.95);
+  color: #fff;
+}

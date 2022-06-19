@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equações lineares</title>
+    <link rel="stylesheet" href="./src/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="shortcut icon" href="./src/math-symbols.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+
+        <div class="title-proj">
+            <h1>Programação Linear e Aplicações</h1>
+        </div>
+
+        <nav class="navbar navbar-expand-lg">
+            <div class="collapse navbar-collapse" id="navbar-content">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" target="_blank" href="https://github.com/luamates">Lucas Amates</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" target="_blank" href="https://github.com/GustavoMcd09">Gustavo Macedo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" target="_blank" href="https://github.com/FelipeGtr01">Felipe Gutierre</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" target="_blank" href="https://github.com/joyce-santiago">Joyce Santiago</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" target="_blank" href="https://github.com/GustavoMcd09">Rayane Justino</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" target="_blank" href="https://github.com/AlexLzn03">Alexsander Lozano</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="box">
+            <div class="box-1"></div>
+            <div class="box-2"></div>
+        </div>
+    </header>
+
+    <div class="content-flex largura2">
+        <div class="inputs">
+            <section id="a001">
+
+                <span>
+                    <h1 id="padrao">Calcular Sistemas Lineares</h1>
+                    <h3 class="explaintext">Calcule sistemas lineares 2x2</h3>
+                </span>
+
+            </section>
+
+            <div id="selectbtn">
+                <a href="#EqLin"> <button id="botao">Acessar</button></a>
+            </div><br>
+        </div>
+
+        <div id="divisoria"></div>
+
+        <div class="definition">
+            <section id="a001">
+
+                <span>
+                    <h1 id="padrao">Calcular com Canto Noroeste</h1>
+                    <h3 class="explaintext">Resolva problemas de transporte rapidamente <br> usando o método Canto
+                        Noroeste.</h3>
+                </span>
+
+            </section>
+            <div id="selectbtn">
+                <a href="./src/cantoNoroeste.html"> <button id="botao">Acessar</button></a>
+            </div><br>
+        </div>
+    </div>
+
+    <img src="./src/matematica.jpeg" alt="imagem de matemática" id="fotoMat">
+
+    <div class="divisoria1"></div>
+
+    <!--INÍCIO DA CALCULADORA DE SISTEMAS LINEARES-->
+
+    <div class="title-proj" id="EqLin">
+        <h1>Sistemas de equações lineares</h1> <br>
+    </div>
+
+    <div class="box">
+        <div class="box-1"></div>
+        <div class="box-2"></div>
+    </div>
+
+    <div class="content-flex">
+        <div class="inputs">
+            <section id="a001">
+
+                <span>
+                    <h1 id="padrao">Forma padrão: Ax + By = C</h1>
+
+                    <h3>
+                        <input class="input" type="number" id="A" value="1">
+                        x +
+                        <input class="input" type="number" id="B" value="2">
+                        y =
+                        <input class="input" type="number" id="C" value="3">
+                    </h3>
+                    <h3>
+                        <input class="input" type="number" id="D" value="4">
+                        x +
+                        <input class="input" type="number" id="E" value="5"> y = <input class="input" type="number"
+                            id="F" value="6">
+                    </h3>
+                </span>
+
+            </section>
+
+            <div id="selectbtn">
+                <button onclick="solve()" id="botao">Resolver</button>
+            </div><br>
+        </div>
+
+        <div id="divisoria"></div>
+
+        <div class="definition">
+            <section id="definicao">
+                <h2>O que são sistemas lineares?</h2>
+                <p>Sistemas lineares são formados por duas ou mais equações lineares que possuem suas incógnitas
+                    relacionadas. Eles podem ser resolvidos por meio de diferentes métodos.</p>
+            </section>
+        </div>
+    </div>
+
+    <div class="solucao">
+        <p>Solução: <span id="solution"></span></p>
+        <div id="calculator"></div>
+    </div>
+
+    <!--FIM DA CALCULADORA DE SISTEMAS LINEARES-->
+
+    <script src="./src/jquery-3.2.1.min.js"></script>
+    <script src="https://www.desmos.com/api/v1.7/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+    <script src="./src/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

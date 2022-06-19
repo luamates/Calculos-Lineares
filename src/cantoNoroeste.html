@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>North West Corner</title>
+	<link rel="stylesheet" href="./style.css">
+	<link rel="shortcut icon" href="./math-symbols.ico" type="image/x-icon">
+	<style>
+		body {
+			background-color: rgb(197, 197, 197);
+		}
+
+		.column {
+			width: 50%;
+			text-align: center;
+			margin: auto;
+		}
+
+		table {
+			border-collapse: collapse;
+			text-align: center;
+			border-radius: 5px;
+		}
+
+		th,
+		td {
+			border: 1px solid black;
+			padding: 2.5px;
+		}
+
+		.cost,
+		.blank {
+			width: 100px;
+		}
+
+		.blank {
+			border-bottom: 0;
+		}
+
+		.x {
+			border-top: 0;
+			height: 25px;
+		}
+
+		.supply,
+		.demand {
+			width: 100px;
+		}
+
+		.hidden1 {
+			display: none;
+		}
+
+		.line-through {
+			text-decoration: line-through;
+		}
+
+		.yellow {
+			background-color: yellow;
+		}
+	</style>
+</head>
+
+<body>
+	<br><a href="../index.html"><button id="goBack">Voltar</button></a>
+	<div class="column content-flex">
+		<h2>Canto Noroeste</h2>
+
+		<table class="table table-striped table-bordered" cellspacing="0" width="90%">
+			<tr>
+				<td>Origens</td>
+				<td>Destinos</td>
+			</tr>
+			<tr>
+				<td><input class="form-control form-control-sm" type="number" min="0" name="jml-supply" id="jml-supply"
+						placeholder="Quantidade de Origens"></td>
+				<td><input class="form-control form-control-sm" type="number" min="0" name="jml-demand" id="jml-demand"
+						placeholder="Quantidade de Destinos"></td>
+			</tr>
+			<tr>
+				<td colspan="3"><button type="button" id="init" class="btn btn-success construirBTN">Construir
+						tabela</button></td>
+			</tr>
+		</table>
+	</div>
+	<div class="col-md-5">
+		<div class="hidden1" id="tbl-nwc-container">
+			<h2>Tabela para Canto Noroeste</h2>
+			<table class="table table-striped table-bordered" cellspacing="0" width="90%">
+				<tbody id="tbl-nwc"></tbody>
+				<tfoot>
+					<tr>
+						<td id="buttons">
+							<button type="button" id="next" class="btn btn-primary">Salvar Valores</button>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+
+	</div>
+
+	<div class="hidden1 alert alert-success" id="hasil-nwc"></div>
+
+	<div class="hidden1 alert alert-danger" id="hasil-ss"></div>
+
+	<script src="jquery-3.2.1.min.js"></script>
+	<script>
+		var step = 0,
+			supply = [],
+			demand = [],
+			data = [],
+			jmlSupply,
+			jmlDemand,
+			stepRow = 0,
+			stepCol = 0,
+			total,
+			sisa;
+		$(document).ready(function () {
+			$('#init').click(function (event) {
+				event.preventDefault();
+
+				step = 0;
+				steppingStone = 0;
+				supply = [];
+				demand = [];
+				data = [];
+				stepRow = 0;
+				stepCol = 0;
+				total = 0;
+				sisa = 0;
+
+				$('#stepping-stone, #hasil-nwc, #hasil-ss').fadeOut(500);
+				$('#next').html('Salvar Valores').fadeIn(500);
+
+				jmlSupply = parseInt($('#jml-supply').val());
+				jmlDemand = parseInt($('#jml-demand').val());
+
+				var tbl = '<tr>' +
+					'<th>&nbsp;</th>';
+				for (var i = 1; i <= parseInt($('#jml-demand').val()); i++) {
+					tbl += '<th colspan="2">Destino ' + i + '</th>';
+				}
+				tbl += '<th>Source</th>' +
+					'</tr>';
+				for (var i = 1; i <= parseInt($('#jml-supply').val()); i++) {
+					tbl += '<tr>' +
+						'<th rowspan="2">Origem ' + i + '</th>';
+					for (var j = 1; j <= parseInt($('#jml-demand').val()); j++) {
+						tbl += '<td class="blank" id="blank-' + i + '-' + j + '">&nbsp;</td>' +
+							'<td><input type="number" min="0" class="cost form-control form-control-sm" name="cost" data-asal="' +
+							i + '" data-tujuan="' + j + '"></td>';
+					}
+					tbl +=
+						'<td rowspan="2"><input type="number" min="0" name="supply" class="supply form-control form-control-sm" data-asal="' +
+						i + '"></td>' +
+						'</tr>' +
+						'<tr>';
+					for (var j = 1; j <= parseInt($('#jml-demand').val()); j++) {
+						tbl += '<td colspan="2" class="x" id="x-' + i + '-' + j + '" data-asal="' + i +
+							'" data-tujuan="' + j + '">&nbsp;</td>';
+					}
+					tbl += '</tr>';
+				}
+				tbl += '<tr>' +
+					'<th>Demand</th>';
+				var col = 1;
+				for (var i = 1; i <= parseInt($('#jml-demand').val()); i++) {
+					col += 2;
+					tbl +=
+						'<td colspan="2"><input type="number" min="0" class="demand form-control form-control-sm" name="demand" data-tujuan="' +
+						i + '"></td>';
+				}
+				tbl += '<td>&nbsp;</td>' +
+					'</tr>';
+				col++;
+
+				$('#buttons').attr('colspan', col);
+				$('#tbl-nwc').html(tbl);
+				$('#tbl-nwc-container').slideDown(500);
+			});
+
+			$('#next').click(function (event) {
+				event.preventDefault();
+				$('.x, .blank').removeClass('yellow');
+
+				if (step == 0) {
+					supply = [];
+					demand = [];
+					data = [];
+
+					var totalSupply = 0,
+						totalDemand = 0;
+
+					$('.supply').each(function (index, el) {
+						supply.push({
+							asal: $(el).data('asal'),
+							nilai: parseInt($(el).val()),
+							sisa: parseInt($(el).val())
+						});
+
+						totalSupply += parseInt($(el).val());
+					});
+
+					$('.demand').each(function (index, el) {
+						demand.push({
+							tujuan: $(el).data('tujuan'),
+							nilai: parseInt($(el).val()),
+							sisa: parseInt($(el).val())
+						});
+
+						totalDemand += parseInt($(el).val());
+					});
+
+					if (totalSupply != totalDemand) {
+						alert('Alerta: a oferta Total não é a mesma que a demanda Total.');
+					} else {
+						total = totalSupply;
+						sisa = totalSupply;
+
+						$('.cost').each(function (index, el) {
+							if ($(el).val() == '') {
+								alert("Os campos 'custo' não podem estar vazios.");
+								return false;
+							} else {
+								var asal = $(el).data('asal');
+								var tujuan = $(el).data('tujuan');
+
+								var row = asal - 1;
+								var col = tujuan - 1;
+
+								if (typeof data[row] === 'undefined') {
+									data[row] = [];
+								}
+								data[row][col] = {
+									asal: asal,
+									tujuan: tujuan,
+									cost: parseInt($(el).val()),
+									x: 0,
+									temp: 0
+								};
+							}
+						});
+						$('.supply, .demand, .cost').attr('disabled', true);
+						$('#next').html('Continuar.');
+					}
+
+					step++;
+					console.log('supply', supply);
+					console.log('demand', demand);
+					console.log('data', data);
+				} else {
+					if (sisa != 0) {
+						var breakLoop = false;
+						for (var i = stepRow; i < jmlSupply; i++) {
+							for (var j = stepCol; j < jmlDemand; j++) {
+								if (supply[i].sisa != 0 && demand[j].sisa != 0) {
+									var x = 0;
+									if (supply[i].sisa < demand[j].sisa) {
+										x = supply[i].sisa;
+										supply[i].sisa -= x;
+										demand[j].sisa -= x;
+										sisa -= x;
+										data[i][j].x = x;
+										data[i][j].temp = x;
+									} else {
+										x = demand[j].sisa;
+										supply[i].sisa -= x;
+										demand[j].sisa -= x;
+										sisa -= x;
+										data[i][j].x = x;
+										data[i][j].temp = x;
+									}
+
+									$('#x-' + (i + 1) + '-' + (j + 1) + ', #blank-' + (i + 1) + '-' + (j + 1))
+										.addClass('yellow');
+									$('#x-' + (i + 1) + '-' + (j + 1)).html(x);
+
+									stepRow = i;
+									stepCol = j;
+									breakLoop = true;
+								}
+
+								if (breakLoop) {
+									break;
+								}
+							}
+
+							if (breakLoop) {
+								break;
+							}
+						}
+
+						if (sisa == 0) {
+							$('#next').html('Mostrar solução.');
+						}
+
+						console.log('step', step);
+						console.log('supply', supply);
+						console.log('demand', demand);
+						console.log('data', data);
+						step++;
+					} else {
+						var totalNwc = 0;
+						var txt = '<br>Resolução = ';
+						for (var i = 0; i < jmlSupply; i++) {
+							for (var j = 0; j < jmlDemand; j++) {
+								if (data[i][j].x != 0) {
+									txt += data[i][j].cost + ' × ' + data[i][j].x;
+									if (i < jmlSupply - 1) {
+										txt += ' + ';
+									}
+
+									totalNwc += data[i][j].cost * data[i][j].x;
+								}
+							}
+						}
+						txt += ' = ' + totalNwc;
+						txt += ' unidades monetárias.';
+						$('#next').fadeOut(500);
+						$('#stepping-stone').fadeIn(500);
+						$('#hasil-nwc').html(txt).fadeIn(500);
+					}
+				}
+			});
+		});
+	</script>
+</body>
+
+</html>
